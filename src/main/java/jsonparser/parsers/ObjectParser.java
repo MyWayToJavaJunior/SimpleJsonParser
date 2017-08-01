@@ -1,4 +1,8 @@
-package jsonparser;
+package jsonparser.parsers;
+
+import jsonparser.Context;
+import jsonparser.ReflectionHelper;
+import jsonparser.abstractClasses.Parser;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;

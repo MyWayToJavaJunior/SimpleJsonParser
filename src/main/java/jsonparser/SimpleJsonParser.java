@@ -1,16 +1,23 @@
 package jsonparser;
 
-import javax.json.JsonObject;
+import jsonparser.abstractClasses.Parser;
+import jsonparser.parsers.ListParser;
+import jsonparser.parsers.NumberParser;
+import jsonparser.parsers.ObjectParser;
+import jsonparser.parsers.StringParser;
+
 import javax.json.JsonValue;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SimpleJsonParser {
 
-    Parser parser;
+    private Parser parser;
 
     public SimpleJsonParser() {
-        addParser(new NumberParser()).setNext(new StringParser()).setNext(new ObjectParser());
+        addParser(new NumberParser())
+                .setNext(new StringParser())
+                .setNext(new ListParser())
+                .setNext(new ObjectParser());
     }
 
     SimpleJsonParser(ArrayList<Parser> parserList){
@@ -20,6 +27,7 @@ public class SimpleJsonParser {
         }
         parserList.get(parserList.size()-1).setNext(new NumberParser())
                 .setNext(new StringParser())
+                .setNext(new ListParser())
                 .setNext(new NumberParser())
                 .setNext(new ObjectParser());
     }
@@ -32,11 +40,10 @@ public class SimpleJsonParser {
     public JsonValue serialize(Object o){
         Context context = new Context();
         context.setParser(this);
-        JsonValue object = parser.parse(o, context);
-        return object;
+        return parser.parse(o, context);
     }
 
-    Parser addParser(Parser parser){
+    private Parser addParser(Parser parser){
         this.parser = parser;
         return parser;
     }

@@ -1,17 +1,13 @@
 package jsonparser;
 
+import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 
 public class Context {
-    JsonObjectBuilder builder;
-    SimpleJsonParser parser;
+    private SimpleJsonParser parser;
 
     public JsonObjectBuilder getBuilder() {
-        return builder;
-    }
-
-    public void setBuilder(JsonObjectBuilder builder) {
-        this.builder = builder;
+        return Json.createObjectBuilder();
     }
 
     public SimpleJsonParser getParser() {

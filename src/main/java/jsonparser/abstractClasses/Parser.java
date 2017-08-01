@@ -1,4 +1,6 @@
-package jsonparser;
+package jsonparser.abstractClasses;
+
+import jsonparser.Context;
 
 import javax.json.JsonValue;
 
@@ -7,7 +9,7 @@ public abstract class Parser {
 
     public abstract JsonValue parse(Object object, Context context);
 
-    public Parser getNext() {
+    protected Parser getNext() {
         return next;
     }
 
